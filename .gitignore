@@ -1,5 +1,21 @@
+# Python
 venv/
 __pycache__/
 *.pyc
+*.pyo
+.Python
+*.egg-info/
+
+# Env / secrets
 .env
+.streamlit/secrets.toml
+*.key
+
+# OS / editor
 .DS_Store
+Thumbs.db
+.vscode/
+*.code-workspace
+
+# Build artifacts (keep the PDF report, ignore temp docx)
+reports/*.docx
