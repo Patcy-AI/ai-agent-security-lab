@@ -10,6 +10,14 @@ against the attacks that break AI agents in the real world.
 > Defensive-security research. All targets are agents built and owned in this repo. Runs 100%
 > locally and free (Ollama), so it can be attacked safely.
 
+## Live demo
+
+A one-click hosted version, `streamlit_app.py`, runs the whole trilogy on a free hosted LLM
+(Groq) so anyone can attack it in the browser — pick **A / B / C**, then try to steal the secret
+and watch each defense fire (or get bypassed). Deploy steps: [`DEPLOY.md`](DEPLOY.md).
+
+**Live demo:** _(add your Streamlit Cloud URL here after deploying)_
+
 ---
 
 ## Result (the scorecard)

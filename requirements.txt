@@ -1,3 +1,7 @@
+# Cloud demo (streamlit_app.py) needs only these two:
+streamlit>=1.40.0
+groq>=0.11.0
+
+# Local Ollama agents (app_a/b/c.py) additionally use:
 langchain-ollama>=0.2.0
 langchain-core>=0.3.0
-streamlit>=1.40.0
