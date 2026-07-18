@@ -222,8 +222,10 @@ def main():
         st.caption("Powered by Groq (free hosted LLM). Demo secret is fake.")
 
     if ss.mode.startswith("B"):
-        st.error("SECRET BREACHED - an advanced attack bypassed the output filter.") if ss.breached \
-            else st.success("SECRET SAFE - no key has leaked to the user.")
+        if ss.breached:
+            st.error("SECRET BREACHED - an advanced attack bypassed the output filter.")
+        else:
+            st.success("SECRET SAFE - no key has leaked to the user.")
     elif ss.mode.startswith("C"):
         st.success("LOCKED DOWN - the secret is never in the model. There is nothing to leak.")
     else:
