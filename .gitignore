@@ -19,3 +19,7 @@ Thumbs.db
 
 # Build artifacts (keep the PDF report, ignore temp docx)
 reports/*.docx
+
+# LibreOffice / temp conversion artifacts
+*.tmp
+.~lock.*#
