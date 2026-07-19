@@ -10,6 +10,10 @@ against the attacks that break AI agents in the real world.
 > Defensive-security research. All targets are agents built and owned in this repo. Runs 100%
 > locally and free (Ollama), so it can be attacked safely.
 
+**New to this?** [`CODE_WALKTHROUGH.md`](CODE_WALKTHROUGH.md) explains — in plain English, with
+before/after code and diagrams — exactly what changed to make the agent safe and what was
+architecturally missing in the vulnerable version.
+
 ## Live demo
 
 A one-click hosted version, `streamlit_app.py`, runs the whole trilogy on a free hosted LLM
