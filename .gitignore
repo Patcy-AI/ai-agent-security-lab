@@ -23,3 +23,6 @@ reports/*.docx
 # LibreOffice / temp conversion artifacts
 *.tmp
 .~lock.*#
+
+# Personal recording aid - not for the repo
+VIDEO_SCRIPT.md
