@@ -20,7 +20,7 @@ A one-click hosted version, `streamlit_app.py`, runs the whole trilogy on a free
 (Groq) so anyone can attack it in the browser — pick **A / B / C**, then try to steal the secret
 and watch each defense fire (or get bypassed). Deploy steps: [`DEPLOY.md`](DEPLOY.md).
 
-**Live demo:** _(add your Streamlit Cloud URL here after deploying)_
+**Live demo:** https://patcy-ai-agent-security-lab.streamlit.app
 
 ---
 
@@ -132,7 +132,7 @@ python -m streamlit run app_c.py   # Locked-down — nothing to leak
 ## Repo structure
 
 - `app_a.py` / `app_b.py` / `app_c.py` — the three agents (Streamlit UIs).
-- `agent_a.py` — terminal version of the vulnerable agent.
+- `streamlit_app.py` — combined live cloud demo (all three agents, Groq-powered).
 - `generate_report.py` — runs the controls and emits the standards-mapped assessment report.
 - `reports/` — the generated Security Assessment Report (Markdown + PDF).
 - `knowledge_base/` — the RAG documents (incl. a poisoned doc for the indirect-injection demo).
