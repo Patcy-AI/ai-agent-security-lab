@@ -74,6 +74,17 @@ server-side vault released only by an authenticated staff tool the user can't in
 
 ---
 
+## Documentation
+
+- **[`ATTACK_CATALOG.md`](ATTACK_CATALOG.md)** — every attack: exact input → what was missing at each stage (A/B/C) → the fix → OWASP LLM / MITRE ATLAS mapping. The study guide.
+- **[`THREAT_MODEL.md`](THREAT_MODEL.md)** — assets, trust boundaries (esp. the RAG data boundary), attacker personas, STRIDE, and the defense ladder as a risk-reduction argument.
+- **[`COMPLIANCE_AND_GOVERNANCE.md`](COMPLIANCE_AND_GOVERNANCE.md)** — NIST AI RMF, EU AI Act, ISO/IEC 42001, data-minimization, and the model card / risk register.
+- **[`CODE_WALKTHROUGH.md`](CODE_WALKTHROUGH.md)** — plain-English before/after of what made the agent safe.
+- **[`DEFENSES_explained.md`](DEFENSES_explained.md)** — each defense in code, with its honest limits.
+- **[`VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md)** — Build→Break→Defend→Lockdown video script.
+
+---
+
 ## Security assessment report (auto-generated evidence)
 
 This repo ships a real assessment tool, not just a write-up. `generate_report.py` executes the
