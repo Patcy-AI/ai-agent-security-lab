@@ -10,10 +10,6 @@ against the attacks that break AI agents in the real world.
 > Defensive-security research. All targets are agents built and owned in this repo. Runs 100%
 > locally and free (Ollama), so it can be attacked safely.
 
-**New to this?** [`CODE_WALKTHROUGH.md`](CODE_WALKTHROUGH.md) explains — in plain English, with
-before/after code and diagrams — exactly what changed to make the agent safe and what was
-architecturally missing in the vulnerable version.
-
 ## Live demo
 
 A one-click hosted version, `streamlit_app.py`, runs the whole trilogy on a free hosted LLM
@@ -76,12 +72,9 @@ server-side vault released only by an authenticated staff tool the user can't in
 
 ## Documentation
 
-- **[`ATTACK_CATALOG.md`](ATTACK_CATALOG.md)** — every attack: exact input → what was missing at each stage (A/B/C) → the fix → OWASP LLM / MITRE ATLAS mapping. The study guide.
-- **[`THREAT_MODEL.md`](THREAT_MODEL.md)** — assets, trust boundaries (esp. the RAG data boundary), attacker personas, STRIDE, and the defense ladder as a risk-reduction argument.
-- **[`COMPLIANCE_AND_GOVERNANCE.md`](COMPLIANCE_AND_GOVERNANCE.md)** — NIST AI RMF, EU AI Act, ISO/IEC 42001, data-minimization, and the model card / risk register.
-- **[`CODE_WALKTHROUGH.md`](CODE_WALKTHROUGH.md)** — plain-English before/after of what made the agent safe.
-- **[`DEFENSES_explained.md`](DEFENSES_explained.md)** — each defense in code, with its honest limits.
-- **[`VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md)** — Build→Break→Defend→Lockdown video script.
+- **[`ATTACK_CATALOG.md`](ATTACK_CATALOG.md)** — every attack: exact input → what was missing at each stage (A/B/C) → the fix → OWASP LLM / MITRE ATLAS mapping.
+- **[`THREAT_MODEL.md`](THREAT_MODEL.md)** — assets, trust boundaries (esp. the RAG data boundary), attacker personas, STRIDE, and the defense ladder.
+- **[`MITIGATIONS.md`](MITIGATIONS.md)** — the fix for each attack: threat → detection → mitigation → residual risk → architectural fix.
 
 ---
 
@@ -95,11 +88,13 @@ whether each **passes or fails as live evidence**, then produces a standards-map
 python generate_report.py    # -> reports/SECURITY_ASSESSMENT_REPORT.md
 ```
 
-The report contains five findings (**PA-001 … PA-005**), each classified against **OWASP LLM
-Top 10 (2025)**, a **MITRE ATLAS** technique, and a **CWE** (CWE-1427 for prompt injection,
-CWE-200 for info disclosure, CWE-862 for missing authorization), with severity scored using the
-**OWASP Risk Rating Methodology** (Severity = Likelihood × Impact) and a per-finding status
-across Agents A / B / C. See [`reports/SECURITY_ASSESSMENT_REPORT.md`](reports/SECURITY_ASSESSMENT_REPORT.md)
+The report contains eight findings (**PA-001 … PA-008**) — covering prompt injection (direct,
+indirect, encoded), multi-asset disclosure (API key, staff token, infrastructure, PII), missing
+authorization, and a planted backdoor — each classified against **OWASP LLM Top 10 (2025)**, a
+**MITRE ATLAS** technique, and a **CWE** (CWE-1427 for prompt injection, CWE-200 for info
+disclosure, CWE-862 for missing authorization, CWE-912 for the hidden backdoor), with severity
+scored using the **OWASP Risk Rating Methodology** (Severity = Likelihood × Impact) and a
+per-finding status across Agents A / B / C. See [`reports/SECURITY_ASSESSMENT_REPORT.md`](reports/SECURITY_ASSESSMENT_REPORT.md)
 (PDF also in `reports/`).
 
 ---
@@ -123,33 +118,33 @@ when an advanced attack **bypasses** the output filter — the exact reason Agen
 
 ---
 
-## Run it
+## Quick start (run it locally in ~2 minutes)
+
+The fastest path is the unified demo — one file, all three agents (A/B/C), no Ollama needed. It runs out of the box; without an API key it falls back to a safe demo mode, and the deterministic guards (input filter, sanitizer, backdoor, output filter) still fire and show in the trace.
 
 ```bash
-# 1. Install Ollama (https://ollama.com) and pull the model
-ollama pull llama3.2:3b
-
-# 2. Environment + deps
-python -m venv venv
-venv\Scripts\activate          # macOS/Linux: source venv/bin/activate
 pip install -r requirements.txt
+streamlit run streamlit_app.py          # open http://localhost:8501
+```
 
-# 3. Run any of the three agents
-python -m streamlit run app_a.py   # Vulnerable  — watch it leak
-python -m streamlit run app_b.py   # Hardened    — block -> catch -> bypass
-python -m streamlit run app_c.py   # Locked-down — nothing to leak
+Pick **Agent A / B / C** in the sidebar and try to steal the secret. To watch the model actually leak (the injection attacks), add a free Groq key: `export GROQ_API_KEY=...` (get one at console.groq.com).
+
+**Alternative — the three agents on a fully local model (Ollama):**
+
+```bash
+# install Ollama (https://ollama.com), then:
+ollama pull llama3.2:3b
+pip install -r requirements.txt
+streamlit run app_a.py                  # Vulnerable  (also app_b.py / app_c.py)
 ```
 
 ## Repo structure
 
-- `app_a.py` / `app_b.py` / `app_c.py` — the three agents (Streamlit UIs).
-- `streamlit_app.py` — combined live cloud demo (all three agents, Groq-powered).
+- `streamlit_app.py` — the unified demo (all three agents, one file). Start here.
+- `app_a.py` / `app_b.py` / `app_c.py` — the three agents as separate local (Ollama) apps.
 - `generate_report.py` — runs the controls and emits the standards-mapped assessment report.
 - `reports/` — the generated Security Assessment Report (Markdown + PDF).
 - `knowledge_base/` — the RAG documents (incl. a poisoned doc for the indirect-injection demo).
-- `DECISIONS.md` — every engineering/security decision and its trade-off.
-- `FINDINGS_agent_a.md` — documented red-team results against Agent A.
-- `DEFENSES_explained.md` — how the regex/output filtering works.
 
 ## Frameworks
 Mapped to the **OWASP Top 10 for LLM Applications (2025)**, **MITRE ATLAS**, and the
