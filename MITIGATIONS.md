@@ -95,14 +95,14 @@ The three maturities — **A vulnerable → B hardened → C locked-down** — a
 
 ### 9 · Planted backdoor — the trigger phrase `open sesame patcy`
 - **Threat (LLM03, supply chain):** a hidden trigger in the agent's code/config dumps the full internal configuration. It fires only on the exact phrase, so normal testing never sees it — an insider or a poisoned dependency plants it.
-- **Detection:** you only find it by **reviewing the code/prompt provenance**, not by black-box prompting — which is the lesson. (In the lab, the trigger is enforced in code so it fires reliably on camera.)
+- **Detection:** you only find it by **reviewing the code/prompt provenance**, not by black-box prompting — which is the lesson. (In the lab, the trigger is enforced in code so it fires reliably in the demo.)
 - **Mitigation (B):** the guards are beneath the backdoor and don't stop it — the input guard sees a harmless phrase and passes; the output filter redacts only the key, so the token, URL, and DB creds still dump. Hardening the surface does **not** remove a backdoor.
 - **Residual risk:** total, as long as the trigger exists and the assets are present.
 - **Architectural fix (C):** two controls in combination — **provenance review** removes the trigger at source, and **data minimization / vault** means that even if a trigger fired, there is no configuration in the model to dump.
 
 ---
 
-## The takeaway for the report (and the camera)
+## The takeaway
 
 Read the residual-risk column top to bottom and the pattern is unmistakable: **every pattern-based control is one rephrase, one re-encoding, or one un-enumerated asset away from failing.** They are worth deploying — defense in depth genuinely raises the cost of an attack — but they are speed bumps, not walls.
 

@@ -3,8 +3,8 @@
 **System under test:** PatcyBot - RAG support agent (Patcy AISec)  
 **Assessment type:** LLM application security review + red-team  
 **Assessor:** Peace Maikasuwa  
-**Date:** 2026-08-05  
-**Report ID:** PA-ASSESS-20260805  
+**Date:** 2026-08-11  
+**Report ID:** PA-ASSESS-20260811  
 
 > Defensive-security assessment of an AI agent the assessor built and owns.
 
@@ -14,7 +14,7 @@ This assessment evaluated a Retrieval-Augmented Generation (RAG) support agent a
 
 In its **vulnerable** configuration the agent disclosed five classes of internal asset - an API key, a staff escalation token, infrastructure credentials (admin URL + database), and staff PII - to direct, indirect (poisoned-document), role-play and encoded attacks, and honoured a planted backdoor trigger. Layered controls (input guard, context sanitizer, output filter) blocked the crude attacks and neutralised the poisoned document, but proved **enumeration-based**: role-play, encoding, recon, PII and the backdoor each got at least one asset past them, because the output filter recognises only the API-key shape (PA-004 / 006 / 007 / 008). The **locked-down** configuration remediated the entire disclosure class **architecturally** - assets are removed from the model's context, internal documents are not indexed (data minimization), the backdoor trigger is removed, and a defense-in-depth output backstop scrubs any asset value - so the agent cannot leak a secret regardless of input.
 
-**Findings by severity (initial vulnerable state):** Critical: 3 | High: 4 | Total: 8.
+**Findings by severity (initial vulnerable state):** Critical: 3 | High: 4 | Medium: 1 | Total: 8.
 
 ## 2. Scope & methodology
 

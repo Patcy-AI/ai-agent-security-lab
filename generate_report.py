@@ -98,6 +98,7 @@ def build_report(ev):
     today = datetime.date.today().isoformat()
     crit = sum(1 for f in FINDINGS if severity(f["likelihood"], f["impact"]) == "Critical")
     high = sum(1 for f in FINDINGS if severity(f["likelihood"], f["impact"]) == "High")
+    med = sum(1 for f in FINDINGS if severity(f["likelihood"], f["impact"]) == "Medium")
     L = ["# AI Security Assessment Report", "",
      "**System under test:** PatcyBot - RAG support agent (Patcy AISec)  ",
      "**Assessment type:** LLM application security review + red-team  ",
@@ -120,7 +121,7 @@ def build_report(ev):
      "are not indexed (data minimization), the backdoor trigger is removed, and a defense-in-depth output "
      "backstop scrubs any asset value - so the agent cannot leak a secret regardless of input.", "",
      "**Findings by severity (initial vulnerable state):** Critical: " + str(crit) + " | High: " + str(high) +
-     " | Total: " + str(len(FINDINGS)) + ".", "",
+     " | Medium: " + str(med) + " | Total: " + str(len(FINDINGS)) + ".", "",
      "## 2. Scope & methodology", "",
      "- **Scope:** the PatcyBot RAG agent (prompt handling, retrieval pipeline, output handling, secret storage).",
      "- **Approach:** manual red-team + reproducible control tests. Evidence in this report is produced by "

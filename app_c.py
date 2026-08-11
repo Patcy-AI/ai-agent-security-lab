@@ -7,7 +7,7 @@ model's context at all (data minimization / least privilege). It lives in a
 server-side "vault" and is released only by an authenticated staff-only tool that a
 normal user can never invoke. You cannot leak what the model was never given.
 
-Design (see DECISIONS.md):
+Design:
   1. Secret REMOVED from the model's context entirely (architectural control).
   2. Vault + authenticated tool: get_escalation_code(staff_token) - denies non-staff.
   3. Defense in depth kept from Agent B: input guard, context sanitizer, output canary.

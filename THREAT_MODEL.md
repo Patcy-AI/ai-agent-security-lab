@@ -1,5 +1,5 @@
 # AI Agent Security Lab (Patcy AISec) — Threat Model
-### Flagship 1 · RAG support chatbot
+### RAG support chatbot
 *How a security engineer reasons about a RAG agent before attacking it. Methodology: STRIDE over the data flow, plus an LLM-specific pass (OWASP LLM Top 10 + MITRE ATLAS). The defining feature of this system is that it ingests untrusted documents — so the data itself is an attack surface.*
 
 ---
